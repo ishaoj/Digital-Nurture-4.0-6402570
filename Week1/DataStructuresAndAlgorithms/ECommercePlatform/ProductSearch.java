@@ -1,51 +1,73 @@
-//Big O Notation analyzes the worst case time complexity of an algorithm.
-//Time complexity of Linear Search is O(n) and that of Binary Search is O(log n)
-//Binary Search would be better if we had sorted array.
+import java.util.Arrays;
+import java.util.Comparator;
 
-// Product class with attributes
 class Product {
-    String productId;
+    int productId;
     String productName;
     String category;
 
-    // Constructor
-    public Product(String productId, String productName, String category) {
+    public Product(int productId, String productName, String category) {
         this.productId = productId;
         this.productName = productName;
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return "Product ID: " + productId + ", Name: " + productName + ", Category: " + category;
+    }
 }
 
-// Search class with Linear and Binary Search implementations
-public class ProductSearch{
+public class ProductSearch {
 
-    // Linear Search Method
-    public static int linearSearch(Product[] products, String targetId) {
-        for (int i = 0; i < products.length; i++) {
-            if (products[i].productId.equals(targetId)) {
-                return i; // Product found at index i
+    // Linear Search
+    public static Product linearSearch(Product[] products, String targetName) {
+        for (Product product : products) {
+            if (product.productName.equalsIgnoreCase(targetName)) {
+                return product;
             }
         }
-        return -1; // Product not found
+        return null; // not found
     }
 
-    // Binary Search Method (Assumes array is sorted by productId)
-    public static int binarySearch(Product[] products, String targetId) {
-        int low = 0, high = products.length - 1;
+    // Binary Search   
+    public static Product binarySearch(Product[] products, String targetName) {
+        // Sort array by productName (case-insensitive)
+        Arrays.sort(products, Comparator.comparing(p -> p.productName.toLowerCase()));
+
+        int low = 0;
+        int high = products.length - 1;
 
         while (low <= high) {
-            int mid = low + (high - low) / 2;
+            int mid = (low + high) / 2;
+            int cmp = targetName.compareToIgnoreCase(products[mid].productName);
 
-            int comparison = products[mid].productId.compareTo(targetId);
-
-            if (comparison == 0) {
-                return mid; // Product found at index mid
-            } else if (comparison < 0) {
-                low = mid + 1;
-            } else {
-                high = mid - 1;
-            }
+            if (cmp == 0) return products[mid];
+            else if (cmp < 0) high = mid - 1;
+            else low = mid + 1;
         }
-        return -1; // Product not found
+
+        return null; // not found
+    }
+
+    
+    public static void main(String[] args) {
+        Product[] products = {
+            new Product(101, "Laptop", "Electronics"),
+            new Product(102, "Smartphone", "Electronics"),
+            new Product(103, "T-shirt", "Clothing"),
+            new Product(104, "Shoes", "Footwear"),
+            new Product(105, "Blender", "Kitchen")
+        };
+
+        String searchTerm = "T-shirt";  
+
+        System.out.println("Linear Search");
+        Product result1 = linearSearch(products, searchTerm);
+        System.out.println(result1 != null ? result1 : "Product not found");
+
+        System.out.println("Binary Search");
+        Product result2 = binarySearch(products, searchTerm);
+        System.out.println(result2 != null ? result2 : "Product not found");
     }
 }
