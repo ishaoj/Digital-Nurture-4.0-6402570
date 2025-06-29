@@ -1,3 +1,4 @@
-com/example/AppTest.class
-CalculatorTest.class
+com/example/Calculator.class
+com/example/CalculatorTest.class
 com/example/AssertionsTest.class
+com/example/AppTest.class
