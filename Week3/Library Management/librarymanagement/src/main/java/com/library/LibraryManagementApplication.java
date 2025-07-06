@@ -1,13 +1,14 @@
-package com.library;
+package com.isha.library;
 
-import com.library.service.BookService;
+import com.isha.library.service.BookService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class MainApp {
+public class LibraryManagementApplication {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
         BookService bookService = (BookService) context.getBean("bookService");
-        bookService.addBook("The Alchemist");
+        bookService.displayBooks();  // should print: Listing all books from the repository...
     }
 }

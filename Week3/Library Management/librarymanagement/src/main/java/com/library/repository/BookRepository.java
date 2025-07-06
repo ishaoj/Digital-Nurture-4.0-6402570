@@ -1,7 +1,7 @@
-package com.library.repository;
+package com.isha.library.repository;
 
 public class BookRepository {
-    public void saveBook(String bookName) {
-        System.out.println("BookRepository: Saving book - " + bookName);
+    public void printAllBooks() {
+        System.out.println("Listing all books from the repository...");
     }
 }
