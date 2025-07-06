@@ -22,18 +22,17 @@
             <version>5.3.29</version>
         </dependency>
     </dependencies>
-
     <build>
-        <plugins>
-            <!-- ✅ Plugin to run the Java Main class -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <mainClass>com.library.MainApp</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
+    <plugins>
+        <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+            <mainClass>com.isha.library.LibraryManagementApplication</mainClass>
+        </configuration>
+        </plugin>
+    </plugins>
     </build>
+
 </project>
